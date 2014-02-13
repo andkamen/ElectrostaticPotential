@@ -7,7 +7,7 @@
 
 using namespace std;
 
-const int N = 20;
+const int N = 40;
 
 #ifndef BOUNDARY_H
 #define BOUNDARY_H
