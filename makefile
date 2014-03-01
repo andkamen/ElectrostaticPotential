@@ -1,15 +1,20 @@
 CC=g++
 libs=-lm
-objs=declarations_shapes.o project_main.o
+cflags=-c -Wall -O2
+objs=project_main.o project_print.o project_algorithm.o
 
 project: $(objs)
 	$(CC) $^ -o $@ $(libs)
 
-main.o: project_main.cpp
-	$(CC) -c $^ -o $@
-
-declarations_shapes.o: declarations_shapes.cpp
-	$(CC) -c $^ -o $@
+%.o: %.cpp
+	$(CC) $(cflags) $< -o $@
 
 clean: $(objs)
-	rm $^
+	rm *.o
+
+
+
+
+
+
+

@@ -1,29 +1,79 @@
 #include "project_header.h"
-//changing value of N in the project_header.h will change the size of the grid. 
-//call ./project 1 to print the mesh to the terminal
-//call ./project 2 to print the mesh to a text file (file opens automatically)
-//call ./project for no output
-int main(int argc, char* argv[])
+
+using namespace std;
+
+void generateMesh(float **mesh );
+
+
+int main ( int argc, char *argv[] )
 {
-  int mesh[N][N]={{0}};//initializes mesh to be at zero at every point
-  int information_b1[5]; //info about a boundary
-  information_b1[2] = 5;//radius
-  information_b1[0]=20;//x origin
-  information_b1[1]=20;//y origin
-  boundary boundary_1(mesh);//creates an object "boundary_1" of class "boundary"
-  boundary_1.circle(information_b1);
-  if (argc!=1){ // if any print option was requested when called
-    switch (atoi(argv[1])){//looks at the command line argument passed
-    case 1:
-      boundary_1.print_to_terminal();
-      break;
-    case 2:
-      boundary_1.print_to_file();
-      break;
-    default:
-      cerr<< "Neither file nor terminal output was selected!" << endl;
-      break;
+    // we will use dynamic memory, because it is easier to pass around
+    // that's how you create a 2D array on the heap:
+    float **mesh = new float*[N];
+    char **bmesh = new char*[N];
+ 
+    // harcore C hack to initialise mesh to 0
+    // (requires string.h or cstring to be included)
+    //void * memset ( void * ptr, int value, size_t num )
+    //Sets the first num bytes of the block of memory pointed by ptr to the specified value (interpreted as an unsigned char)
+    for (int i = 0; i < N; i++) {
+	mesh[i] = new float[N];
+	bmesh[i] = new char[N];
+	memset(mesh[i], 0, N * sizeof(float));
+	memset(bmesh[i], '.', N * sizeof(char));
     }
-  }
+
+
+    generateMesh(mesh);
+    algorithm(mesh);
+/*    
+    // test print of mesh at the end of everything
+     cout<<"This is end result"<<endl;
+    for (int i = 0; i < N; ++i){
+	for (int j = 0; j < N; ++j){
+	    cout << mesh[i][j] << ' ';
+	}
+	cout << endl;
+    }
+
+  cout<<"This is boundary"<<endl;
+    for (int i = 0; i < N; ++i){
+	for (int j = 0; j < N; ++j){
+	    cout << bmesh[i][j] << ' ';
+	}
+	cout << endl;
+    }
+*/
+
+    return 0;
+}    
+
+
+
+void generateMesh(float **mesh)
+{
+    // Boundary b;
+    Boundary *b_ptr;
+    string instruction;
+    while (!cin.eof()) {
+	cin >> instruction;
+	if (instruction == "Point")
+	    b_ptr = new Point();
+	if (instruction == "Circle") 
+	    b_ptr = new Circle();
+	if (instruction == "Rectangle") 
+	    b_ptr = new Rectangle();
+	if (instruction == "Line") 
+	    b_ptr = new Line();
+	if (instruction == "break")
+	    break;
+	b_ptr->injectInto( mesh );
+//	b_ptr->print_to_terminal( mesh );
+    }
+    delete b_ptr;
 }
+
+
+
+
 
