@@ -1,0 +1,10 @@
+Mesh 100
+Point 11 11 10
+Line 0 0 0 1 1
+Rectangle 1 1 8 8 10
+Line 0 9 0 1 1
+Rectangle 19 46 6 6 1
+Rectangle 39 46 6 6 1001
+Rectangle 59 46 6 6 -999
+Rectangle 79 46 6 6 1
+break
