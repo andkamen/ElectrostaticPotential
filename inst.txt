@@ -1,4 +1,7 @@
-Mesh 200
+Mesh 101
 Ground 0
-Circle 50 50 10 100
+Line 0 0 0 1 -1000
+Circle 50 50 10 0
+Line 0 100 0 1 1000
 break
+

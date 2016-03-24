@@ -1,5 +1,6 @@
 #include <iostream>
 #include <fstream>//file manip
+#include <sstream>//file output stringstreams
 #include <cmath>//math,abs
 #include <cstring>//strings
 #include <cstdlib>
@@ -9,67 +10,67 @@ using namespace std;
 #define BOUNDARY_H
 
 class Boundary{
- public:
-  ~Boundary() {}
-  void virtual injectInto (float **mesh, char **bmesh) {};
+    public:
+	~Boundary() {}
+	void virtual injectInto (float **mesh, char **bmesh) {};
 };
 
 class Point : public Boundary {
- private:
-  int x_origin;
-  int y_origin;
-  float potential; 
-  
- public:
-  Point() {
-    cin >> x_origin >> y_origin >> potential;
-  }
-  ~Point() {};
-  void injectInto (float **mesh, char **bmesh);
+    private:
+	int x_origin;
+	int y_origin;
+	float potential; 
+
+    public:
+	Point() {
+	    cin >> x_origin >> y_origin >> potential;
+	}
+	~Point() {};
+	void injectInto (float **mesh, char **bmesh);
 };
 
 class Circle : public Boundary {
- private:
-  int x_origin;
-  int y_origin;
-  int radius;
-  float potential;
- public:
-  Circle() {
-    cin >> x_origin  >> y_origin >> radius >> potential;
-  }
-  ~Circle() {};
-  void injectInto (float **mesh, char **bmesh);
+    private:
+	int x_origin;
+	int y_origin;
+	int radius;
+	float potential;
+    public:
+	Circle() {
+	    cin >> x_origin  >> y_origin >> radius >> potential;
+	}
+	~Circle() {};
+	void injectInto (float **mesh, char **bmesh);
 };
 
 class Rectangle : public Boundary {
- private:
-  int x_origin;
-  int y_origin;
-  int height;
-  int width;
-  float potential; 
- public:
-  Rectangle() { 
-    cin >> x_origin >> y_origin >> height >> width >> potential;
-  }
-  ~Rectangle() {};
-  void injectInto (float **mesh, char **bmesh);
+    private:
+	int x_origin;
+	int y_origin;
+	int height;
+	int width;
+	float potential; 
+    public:
+	Rectangle() { 
+	    cin >> x_origin >> y_origin >> height >> width >> potential;
+	}
+	~Rectangle() {};
+	void injectInto (float **mesh, char **bmesh);
 };
 
 class Line : public Boundary {
- private:
-  int column;
-  int row;
-  int start;
-  int choice;
-  float potential; 
- public:
-  Line() { 
-    cin >> column >> row >> start >> choice >> potential;
-  }
-  ~Line() {};
-  void injectInto (float **mesh, char **bmesh);
+    private:
+	int column;
+	int row;
+	int start;
+	int choice;
+	float potential; 
+    public:
+	Line() { 
+	    cin >> column >> row >> start >> choice >> potential;
+	}
+	~Line() {};
+	void injectInto (float **mesh, char **bmesh);
 };
 
 #endif
